@@ -3,17 +3,27 @@ const mainWindow = document.getElementsByClassName('mainwindow')[0];
 const totalDiv = document.getElementsByClassName('total')[0];
 
 function addRow (){
-  const row = document.createElement('div');
+  let row = document.createElement('div');
   row.innerHTML = `
   <div class="rows">
     <input type="text" class="name"><input type="text" class="per100"><input type="text" class="grams"><div class="result"></div>
   </div>`;
   mainWindow.insertBefore(row, plusBtn);
+  row.children[0].children[0].focus();
+
 }
+
 function handleChange(e) {
   let per100 = parseInt(e.target.parentNode.children[1].value);
   let weight = e.target.parentNode.children[2].value;
   let text = e.target.parentNode.children[3];
+
+  if(e.which==13) {
+    if(e.target.classList.value.includes('grams')) {
+      addRow();
+    }
+    e.target.nextSibling.focus();
+  }
 
   if(weight.includes('-')) {
     weight = weight.split('-').reduce((a,v)=>+a- +v);
@@ -30,11 +40,16 @@ function handleChange(e) {
   text.textContent = result.toFixed(2);
   total();
 }
+
 function total() {
   let allResults = document.querySelectorAll('.result');
   let total = 0;
   allResults.forEach(node=>total+= +node.textContent);
   totalDiv.textContent = total.toFixed(2);
+}
+
+function handleEnter(e) {
+
 }
 
 addRow();
