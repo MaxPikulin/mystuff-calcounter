@@ -1,6 +1,6 @@
 // global vars
-const mainWindow = document.getElementById('mainwindow');
-const addRowBtn = document.getElementById('addrow');
+const mainWindow = document.getElementById('mainWindow');
+const addRowBtn = document.getElementById('addRow');
 const totalDiv = document.getElementById('total');
 const recipeObject = {};
 
@@ -9,11 +9,11 @@ function storeData() {
 }
 
 function saveRecipeObject() {
-  // TODO: dave changes to object that represent all fields.
+  // TODO: save changes to object that represent all fields.
 }
 
 function fillData() {
-  // TODO: fetch data from localstorage and generate propery set of fields.
+  // TODO: fetch data from localstorage and generate proper set of fields.
 }
 
 function calculateRow(row) {
@@ -34,7 +34,14 @@ function addRow() {
 
 function changeHandler(e) {
   // TODO: handle all change events on mainform, pass needed references to other functions (saveRecipeObject...)
-
+  const parent = e.target.parentElement;
+  const itemName = parent.getElementsByClassName('itemName')[0];
+  const calories = parent.getElementsByClassName('calories')[0];
+  const weight = parent.getElementsByClassName('weight')[0];
+  const result = parent.getElementsByClassName('result')[0];
+  // TODO: here maybe pass all elements or values to saveRecipeObject to store.
+  // calculate result (+sign to convert string to int)
+  result.textContent = +calories.value / +weight.value * 100;
 }
 
 function removeRow() {
@@ -44,4 +51,5 @@ function removeRow() {
 
 // event handlers
 addRowBtn.addEventListener('click', addRow);
-mainWindow.addEventListener('change', changeHandler);
+mainWindow.addEventListener('change', changeHandler, true);
+mainWindow.addEventListener('keydown', changeHandler, true);
