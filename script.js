@@ -1,3 +1,4 @@
+// test some stuff
 function storeData() {
   // TODO: Store fields data in object and save it to localstorage.
 }
