@@ -7,7 +7,7 @@ function saveRecipeObject() {
 }
 
 function fillData() {
-  // TODO: fetch data from localstorage and generate proper set of fields.
+  // TODO: fetch data from localstorage and generate propery set of fields.
 }
 
 function calculateRow(row) {
@@ -19,7 +19,7 @@ function calculateTotal() {
 }
 
 function addRow() {
-  // TODO: add new row to the screen. 
+  // TODO: add new row to the screen.
 }
 
 function changeHandler(e) {
