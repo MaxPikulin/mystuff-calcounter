@@ -27,6 +27,7 @@ function calculateTotal() {
 function addRow() {
   // TODO: add new row to the screen. (looks like innerHTML works faster in this case than bunch of createElements and classList.add)
   const row = document.createElement('div');
+  row.classList.add('rows');
   row.innerHTML = `<input class="itemName"><input class="calories"><input class="weight"><div class="result"></div>`;
   mainWindow.appendChild(row);
   return row;
@@ -41,15 +42,17 @@ function changeHandler(e) {
   const result = parent.getElementsByClassName('result')[0];
   // TODO: here maybe pass all elements or values to saveRecipeObject to store.
   // calculate result (+sign to convert string to int)
-  result.textContent = +calories.value / +weight.value * 100;
+  //debugger;
+  result.textContent = +calories.value * +weight.value / 100;
 }
 
 function removeRow() {
   // TODO: remove row.
 }
 
-
+// add first row at the begining
+addRow();
 // event handlers
 addRowBtn.addEventListener('click', addRow);
+mainWindow.addEventListener('keyup', changeHandler, true);
 mainWindow.addEventListener('change', changeHandler, true);
-mainWindow.addEventListener('keydown', changeHandler, true);

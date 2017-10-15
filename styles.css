@@ -8,7 +8,7 @@ body {
   background-color: lightblue;
 }
 
-.mainwindow {
+.mainWindow {
   min-width: 600px;
   min-height: 300px;
   background-color: white;
@@ -22,7 +22,7 @@ body {
   height: 1.8em;
 }
 
-.rows:nth-of-type(2n+3) {
+.rows:nth-of-type(2n+2) {
   background-color: rgb(240, 240, 240);
 }
 
