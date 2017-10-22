@@ -51,10 +51,17 @@ function addRowHandler() {
 }
 
 function keyHandler(e) {
-  const field = e.target.classList.value;
+  const target = e.target;
+  if (e.which == 13) {
+    if (target.classList.value.includes('weight')) {
+      addRowHandler();
+    }
+    target.nextSibling.focus();
+  }
+  const field = target.classList.value;
   const key = e.key;
   // console.log(field, e);
-  if ((field == 'calories' || field == 'weight') && !('0123456789-+*/.'.includes(key))) {
+  if ((field == 'calories' && !('0123456789.'.includes(key))) || ((field == 'weight' && !('0123456789-+*/.'.includes(key))))) {
     e.preventDefault();
     return;
   }
@@ -74,6 +81,7 @@ function composeRow(rowObj = {}) {
   row = row.firstElementChild;
   mainWindow.appendChild(row);
   changeHandler(row);
+  row.firstElementChild.focus();
   return row;
 }
 
@@ -111,7 +119,7 @@ function calculateField(field, signs, numbers) {
   const fieldValue = field.value;
   if (!signs) {
     signs = fieldValue.replace(/[^-+*/]/g, '').split('');
-    numbers = fieldValue.split(/[^\d.]/).map(Number);
+    numbers = fieldValue.split(/[^\d.]/).map(v => v == '.' ? 0 : Number(v));
   }
   if (signs.length > 0 && numbers[numbers.length - 1] == '') {
     field.parentElement.classList.add('nudge');
