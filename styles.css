@@ -1,4 +1,7 @@
 * {
+  font-family: 'Racing Sans One', cursive;
+  font-family: 'Unna', serif;
+  font-family: 'Itim', cursive;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -79,4 +82,8 @@ body {
 .nudge {
   border: 1px solid blue;
   border-radius: 3px;
+}
+
+.itemName {
+  font-family: 'Rye', cursive;
 }
