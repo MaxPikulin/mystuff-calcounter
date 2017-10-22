@@ -70,6 +70,13 @@ body {
   padding: 0 5px 0 5px;
 }
 
-.delrow {
+.deleteRowBtn {
   width: 30px;
+  border-color: red;
+  border-radius: 5px;
+}
+
+.nudge {
+  border: 1px solid blue;
+  border-radius: 3px;
 }
