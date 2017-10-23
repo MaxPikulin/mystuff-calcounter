@@ -56,7 +56,7 @@ function calculateTotalWeight() {
 
 function calculateInCent() {
   const result = (+totalCaloriesDiv.textContent / calculateField(totalWeightDiv)) * 100;
-  caloriesInCent.textContent = (isNaN(result) ? 0 : result).toFixed(0);
+  caloriesInCent.textContent = ((isNaN(result) || result == 'Infinity') ? 0 : result).toFixed(0);
 }
 
 // helper func just to get rid of event argument and send right rowNumber
@@ -67,7 +67,9 @@ function addRowHandler() {
 function keyHandler(e) {
   const target = e.target;
   if (e.which == 13) {
-    if (target.classList.value.includes('weight')) {
+    if (target.classList.value.includes('weight') && target.parentElement.nextSibling) {
+      target.parentElement.nextSibling.firstElementChild.focus();
+    } else if (target.classList.value.includes('weight')) {
       addRowHandler();
     }
     target.nextSibling.focus();
@@ -137,6 +139,7 @@ function calculateField(field, signs, numbers) {
   }
   if (signs.length > 0 && numbers[numbers.length - 1] == '') {
     field.parentElement.classList.add('nudge');
+    return numbers[0];
   } else {
     field.parentElement.classList.remove('nudge');
   }
@@ -181,6 +184,7 @@ fillData();
 
 // event handlers
 mainWindow.addEventListener('keypress', keyHandler, true);
+// mainWindow.addEventListener('touchend', keyHandler, true);
 mainWindow.addEventListener('click', clickHandler, true);
 mainWindow.addEventListener('keyup', changeHandler, true);
 mainWindow.addEventListener('change', changeHandler, true);
