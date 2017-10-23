@@ -17,6 +17,7 @@ body {
 }
 
 .rows {
+  border: 1px solid rgba(255, 255, 255, 0);
   margin: 5px 0 5px 0;
   display: flex;
 }
@@ -43,12 +44,21 @@ body {
   border: 1px solid lightgray;
 }
 
-.total {
-  width: min-content;
+.totals {
+  display: inline-block;
+}
+
+.totals>* {
+  width: max-content;
   padding: 0 5px 0 5px;
   font-size: 3em;
   color: green;
-  display: inline-block;
+  display: inherit;
+  font-family: 'Racing Sans One', cursive;
+}
+
+.totals span:last-of-type {
+  font-size: 1em;
 }
 
 .header {
@@ -88,10 +98,6 @@ body {
 
 .header>span {
   background-color: white;
-}
-
-.total {
-  font-family: 'Racing Sans One', cursive;
 }
 
 #resetWindow {

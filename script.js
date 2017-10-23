@@ -1,7 +1,9 @@
 // global vars
 const mainWindow = document.getElementById('mainWindow');
 const addRowBtn = document.getElementById('addRowBtn');
-const totalDiv = document.getElementById('total');
+const totalCaloriesDiv = document.getElementById('totalCalories');
+const totalWeightDiv = document.getElementById('totalWeight');
+const caloriesInCent = document.getElementById('caloriesInCent');
 const resetBtn = document.getElementById('resetWindow');
 let recipeObject = {
   rowNumber: 0
@@ -42,7 +44,19 @@ function fillData() {
 function calculateTotal() {
   // TODO: get all row results, calculate total.
   const allResults = Array.from(document.getElementsByClassName('result'));
-  totalDiv.textContent = (allResults.reduce((a, v) => a + (+v.textContent), 0)).toFixed(2) || '0.00';
+  totalCaloriesDiv.textContent = (allResults.reduce((a, v) => a + (+v.textContent), 0)).toFixed(0) || '0';
+  calculateTotalWeight();
+}
+
+function calculateTotalWeight() {
+  const allWeights = Array.from(document.getElementsByClassName('weight'));
+  totalWeightDiv.textContent = (allWeights.reduce((a, v) => a + calculateField(v), 0)).toFixed(0) || '0';
+  calculateInCent();
+}
+
+function calculateInCent() {
+  const result = (+totalCaloriesDiv.textContent / calculateField(totalWeightDiv)) * 100;
+  caloriesInCent.textContent = (isNaN(result) ? 0 : result).toFixed(0);
 }
 
 // helper func just to get rid of event argument and send right rowNumber
@@ -116,7 +130,7 @@ function clickHandler(e) {
 }
 
 function calculateField(field, signs, numbers) {
-  const fieldValue = field.value;
+  const fieldValue = field.value || field.textContent;
   if (!signs) {
     signs = fieldValue.replace(/[^-+*/]/g, '').split('');
     numbers = fieldValue.split(/[^\d.]/).map(v => v == '.' ? 0 : Number(v));
@@ -166,9 +180,11 @@ function resetWindow() {
 fillData();
 
 // event handlers
-addRowBtn.addEventListener('click', addRowHandler);
 mainWindow.addEventListener('keypress', keyHandler, true);
 mainWindow.addEventListener('click', clickHandler, true);
 mainWindow.addEventListener('keyup', changeHandler, true);
 mainWindow.addEventListener('change', changeHandler, true);
+addRowBtn.addEventListener('click', addRowHandler);
 resetBtn.addEventListener('click', resetWindow);
+totalWeightDiv.addEventListener('keyup', calculateInCent);
+totalWeightDiv.addEventListener('change', calculateInCent);
