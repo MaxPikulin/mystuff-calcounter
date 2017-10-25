@@ -184,7 +184,7 @@ fillData();
 
 // event handlers
 mainWindow.addEventListener('keypress', keyHandler, true);
-// mainWindow.addEventListener('touchend', keyHandler, true);
+mainWindow.addEventListener('touchend', keyHandler, true);
 mainWindow.addEventListener('click', clickHandler, true);
 mainWindow.addEventListener('keyup', changeHandler, true);
 mainWindow.addEventListener('change', changeHandler, true);
